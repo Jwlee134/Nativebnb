@@ -1,43 +1,55 @@
-import React from "react";
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  useColorScheme,
-  View,
-} from "react-native";
+import AppLoading from "expo-app-loading";
+import { Asset } from "expo-asset";
+import React, { useState } from "react";
+import { Image, SafeAreaView, StatusBar, useColorScheme } from "react-native";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import Gate from "./components/Gate";
+import { persister, store } from "./store";
 
-import {
-  Colors,
-  Header,
-  LearnMoreLinks,
-} from "react-native/Libraries/NewAppScreen";
+const cacheImages = (images: (string | number)[]) =>
+  images.map(image => {
+    if (typeof image === "string") {
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
+    }
+  });
 
 const App = () => {
+  const [isReady, setIsReady] = useState(false);
+
   const isDarkMode = useColorScheme() === "dark";
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const loadAssets = async () => {
+    const imageAssets = cacheImages([require("~/assets/images/home.jpg")]);
+    await Promise.all(imageAssets);
   };
 
+  const handleFinish = () => setIsReady(true);
+
+  if (isReady) {
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar
+          barStyle={isDarkMode ? "light-content" : "dark-content"}
+          backgroundColor={"transparent"}
+        />
+        <Provider store={store}>
+          <PersistGate persistor={persister}>
+            <Gate />
+          </PersistGate>
+        </Provider>
+      </SafeAreaView>
+    );
+  }
+
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? "light-content" : "dark-content"}
-        backgroundColor={"transparent"}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <AppLoading
+      startAsync={loadAssets}
+      onError={console.warn}
+      onFinish={handleFinish}
+    />
   );
 };
 
