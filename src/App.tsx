@@ -13,9 +13,6 @@ import {
   LearnMoreLinks,
 } from "react-native/Libraries/NewAppScreen";
 
-import { Constants } from "react-native-unimodules";
-console.log(Constants.systemFonts);
-
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
 
@@ -25,7 +22,10 @@ const App = () => {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
+      <StatusBar
+        barStyle={isDarkMode ? "light-content" : "dark-content"}
+        backgroundColor={"transparent"}
+      />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
