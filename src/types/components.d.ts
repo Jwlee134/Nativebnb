@@ -9,6 +9,7 @@ export interface IButton {
   text: string;
   style?: StyleProp<ViewStyle>;
   backgroundColor: BackgroundColor;
+  loading?: boolean;
 }
 
 export interface IStyleProps {

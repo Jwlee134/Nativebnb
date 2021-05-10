@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, TouchableOpacity } from "react-native";
+import { ActivityIndicator, Dimensions, TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 import palette from "~/styles/palette";
 import { IButton, IGetColorProps, IStyleProps } from "~/types/components";
@@ -41,6 +41,7 @@ const Container = styled.View<IStyleProps>`
   border-radius: 8px;
   padding: 12px 0px;
   height: 48px;
+  justify-content: center;
   ${({ backgroundColor }) => getColor({ backgroundColor, type: "view" })}
 `;
 
@@ -50,10 +51,23 @@ const Label = styled.Text<IStyleProps>`
   ${({ backgroundColor }) => getColor({ backgroundColor, type: "text" })}
 `;
 
-const Button = ({ onPress, text, style, backgroundColor }: IButton) => (
-  <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+const Button = ({
+  onPress,
+  text,
+  style,
+  backgroundColor,
+  loading,
+}: IButton) => (
+  <TouchableOpacity disabled={loading} onPress={onPress} activeOpacity={0.8}>
     <Container style={style} backgroundColor={backgroundColor}>
-      <Label backgroundColor={backgroundColor}>{text}</Label>
+      {loading ? (
+        <ActivityIndicator
+          size="large"
+          color={backgroundColor === "red" ? "white" : "black"}
+        />
+      ) : (
+        <Label backgroundColor={backgroundColor}>{text}</Label>
+      )}
     </Container>
   </TouchableOpacity>
 );

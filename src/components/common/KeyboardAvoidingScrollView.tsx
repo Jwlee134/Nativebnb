@@ -9,6 +9,7 @@ const KeyboardAvoidingScrollView = ({ children }: { children: ReactNode }) => (
       justifyContent: "center",
     }}>
     <ScrollView
+      keyboardShouldPersistTaps="handled"
       contentContainerStyle={{
         flexGrow: 1,
         justifyContent: "center",
