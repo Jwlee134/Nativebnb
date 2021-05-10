@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const TabIcon = ({ name, focused, color }: IProps) => (
-  <Ionicons name={focused ? name : `${name}-outline`} size={26} color={color} />
+  <Ionicons name={focused ? name : `${name}-outline`} size={24} color={color} />
 );
 
 export default TabIcon;

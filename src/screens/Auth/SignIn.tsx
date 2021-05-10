@@ -6,7 +6,7 @@ import { loginAPI } from "~/api/auth";
 import Button from "~/components/common/Button";
 import DismissKeyboard from "~/components/common/DismissKeyboard";
 import Input from "~/components/common/Input";
-import { login, userLogin } from "~/store/user";
+import { login } from "~/store/user";
 import { SignInRouteProps, SignInScreenProps } from "~/types/navigator";
 import { isEmail } from "~/utils";
 

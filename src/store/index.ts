@@ -17,8 +17,9 @@ import {
 } from "redux-persist";
 
 import user from "./user";
+import rooms from "./rooms";
 
-const reducer = combineReducers({ user });
+const reducer = combineReducers({ user, rooms });
 
 const persistConfig = {
   key: "root",

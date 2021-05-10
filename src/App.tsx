@@ -26,6 +26,10 @@ const App = () => {
       require("~/assets/images/home.jpg"),
       require("~/assets/images/welcome.jpg"),
       require("~/assets/images/airbnb-logo.png"),
+      require("~/assets/images/photo1.jpg"),
+      require("~/assets/images/photo2.jpg"),
+      require("~/assets/images/photo3.jpg"),
+      require("~/assets/images/photo4.jpg"),
     ]);
     await Promise.all(imageAssets);
   };
