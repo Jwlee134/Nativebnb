@@ -22,7 +22,11 @@ const App = () => {
   const isDarkMode = useColorScheme() === "dark";
 
   const loadAssets = async () => {
-    const imageAssets = cacheImages([require("~/assets/images/home.jpg")]);
+    const imageAssets = cacheImages([
+      require("~/assets/images/home.jpg"),
+      require("~/assets/images/welcome.jpg"),
+      require("~/assets/images/airbnb-logo.png"),
+    ]);
     await Promise.all(imageAssets);
   };
 
@@ -34,6 +38,7 @@ const App = () => {
         <StatusBar
           barStyle={isDarkMode ? "light-content" : "dark-content"}
           backgroundColor={"transparent"}
+          translucent
         />
         <Provider store={store}>
           <PersistGate persistor={persister}>
