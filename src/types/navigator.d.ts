@@ -1,9 +1,13 @@
+import { RouteProp } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 export type AuthStackParamList = {
   Welcome: undefined;
   SignUp: undefined;
-  SignIn: undefined;
+  SignIn: {
+    email?: string;
+    password?: string;
+  };
 };
 
 export type WelcomeScreenProps = StackNavigationProp<
@@ -20,3 +24,5 @@ export type SignInScreenProps = StackNavigationProp<
   AuthStackParamList,
   "SignIn"
 >;
+
+export type SignInRouteProps = RouteProp<AuthStackParamList, "SignIn">;

@@ -34,18 +34,18 @@ const App = () => {
 
   if (isReady) {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar
-          barStyle={isDarkMode ? "light-content" : "dark-content"}
-          backgroundColor={"transparent"}
-          translucent
-        />
-        <Provider store={store}>
-          <PersistGate persistor={persister}>
+      <Provider store={store}>
+        <PersistGate persistor={persister}>
+          <SafeAreaView style={{ flex: 1 }}>
+            <StatusBar
+              barStyle={isDarkMode ? "light-content" : "dark-content"}
+              backgroundColor={"transparent"}
+              translucent
+            />
             <Gate />
-          </PersistGate>
-        </Provider>
-      </SafeAreaView>
+          </SafeAreaView>
+        </PersistGate>
+      </Provider>
     );
   }
 
